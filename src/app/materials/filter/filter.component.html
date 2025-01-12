@@ -1,0 +1,30 @@
+<form [formGroup]="filterForm" class="filter-grid">
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Filtrar por nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tipo</mat-label>
+        <input matInput formControlName="tipo" placeholder="Filtrar por tipo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Ciudad</mat-label>
+        <mat-select formControlName="ciudad">
+            <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Fecha de Compra</mat-label>
+        <input matInput [matDatepicker]="fechaCompraPicker" formControlName="fechaCompra" />
+        <mat-datepicker-toggle matSuffix [for]="fechaCompraPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fechaCompraPicker></mat-datepicker>
+    </mat-form-field>
+    
+    <div class="filter-buttons">
+        <button mat-raised-button color="primary" (click)="onApplyFilters()">Aplicar</button>
+        <button mat-button color="warn" (click)="onClearFilters()">Limpiar</button>
+    </div>
+</form>

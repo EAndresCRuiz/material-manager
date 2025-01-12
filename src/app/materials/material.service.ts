@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -13,6 +13,18 @@ export class MaterialService {
 
   getAllMaterials(): Observable<any> {
     return this.http.get(`${this.apiUrl}`).pipe(catchError(this.handleError));
+  }
+
+  getFilteredMaterials(filters: any): Observable<any[]> {
+    let params = new HttpParams();
+
+    Object.keys(filters).forEach((key) => {
+      if (filters[key]) {
+        params = params.set(key, filters[key]);
+      }
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}/filter`, { params });
   }
 
   getMaterialById(id: number): Observable<any> {

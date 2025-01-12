@@ -1,4 +1,7 @@
 <h1>Lista de Materiales</h1>
+
+<app-filter (applyFilters)="loadMaterials($event)"></app-filter>
+
 <button mat-raised-button color="primary" routerLink="/materials/create">Crear Nuevo Material</button>
 
 <mat-table [dataSource]="materials" class="mat-elevation-z8">
