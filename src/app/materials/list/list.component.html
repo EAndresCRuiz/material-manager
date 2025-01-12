@@ -1,27 +1,26 @@
-<div>
-    <!-- <app-materials-filter (filter)="onFilter($event)"></app-materials-filter> -->
+<h1>Lista de Materiales</h1>
+<button mat-raised-button color="primary" routerLink="/materials/create">Crear Nuevo Material</button>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Precio</th>
-                <th>Fecha Compra</th>
-                <th>Fecha Venta</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let material of materials">
-              <td>{{ material.nombre }}</td>
-              <td>{{ material.tipo }}</td>
-              <td>{{ material.precio }}</td>
-              <td>{{ material.fechaCompra }}</td>
-              <td>{{ material.fechaVenta }}</td>
-              <td>
-                <!-- <button class="btn btn-warning btn-sm" [routerLink]="['/materials/edit', material.id]">Editar</button> -->
-              </td>
-            </tr>
-          </tbody>          
-    </table>
-</div>
+<mat-table [dataSource]="materials" class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.nombre }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.tipo }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let material">
+            <button mat-icon-button color="primary" [routerLink]="['/materials/edit', material.id]">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

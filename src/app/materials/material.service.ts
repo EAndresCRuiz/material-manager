@@ -15,6 +15,10 @@ export class MaterialService {
     return this.http.get(`${this.apiUrl}`).pipe(catchError(this.handleError));
   }
 
+  getMaterialById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
   filterMaterials(params: any): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/filter`, { params })
