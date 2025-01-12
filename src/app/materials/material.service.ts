@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class MaterialService {
-  private apiUrl = 'http://localhost:8080/api/materials';
+  private apiUrl = 'http://localhost:8080/api/materiales';
 
   constructor(private http: HttpClient) { }
 

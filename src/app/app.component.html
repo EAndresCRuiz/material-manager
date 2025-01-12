@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+    <span>Material Manager</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/materials">Lista</a>
+    <a mat-button routerLink="/materials/create">Crear Material</a>
+</mat-toolbar>
+
+<div class="main-content">
+    <router-outlet></router-outlet>
+</div>
+
+<footer>
+    <p>© 2025 Material Manager. Todos los derechos reservados.</p>
+</footer>
