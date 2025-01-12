@@ -36,7 +36,7 @@
 
     <mat-form-field appearance="fill" class="form-field">
         <mat-label>Fecha de Compra</mat-label>
-        <input matInput [matDatepicker]="compraPicker" formControlName="fecha_compra" />
+        <input matInput [matDatepicker]="compraPicker" formControlName="fechaCompra" />
         <mat-datepicker-toggle matSuffix [for]="compraPicker"></mat-datepicker-toggle>
         <mat-datepicker #compraPicker></mat-datepicker>
         <mat-error *ngIf="materialForm.get('fecha_compra')?.invalid && materialForm.get('fecha_compra')?.touched">
@@ -46,7 +46,7 @@
 
     <mat-form-field appearance="fill" class="form-field">
         <mat-label>Fecha de Venta</mat-label>
-        <input matInput [matDatepicker]="ventaPicker" formControlName="fecha_venta" />
+        <input matInput [matDatepicker]="ventaPicker" formControlName="fechaVenta" />
         <mat-datepicker-toggle matSuffix [for]="ventaPicker"></mat-datepicker-toggle>
         <mat-datepicker #ventaPicker></mat-datepicker>
     </mat-form-field>
@@ -63,8 +63,8 @@
 
     <mat-form-field appearance="fill" class="form-field">
         <mat-label>Ciudad</mat-label>
-        <mat-select formControlName="ciudad_id">
-            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</mat-option>
+        <mat-select formControlName="ciudadId">
+            <mat-option *ngFor="let city of cities" [value]="city.id">{{ city.nombre }}</mat-option>
         </mat-select>
         <mat-error *ngIf="materialForm.get('ciudad_id')?.invalid && materialForm.get('ciudad_id')?.touched">
             La ciudad es obligatoria.

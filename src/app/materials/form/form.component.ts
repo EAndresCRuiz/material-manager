@@ -8,6 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
+import { CityService } from '../../core/services/city.service';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { CUSTOM_DATE_FORMATS } from '../../core/config/date-formats';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 @Component({
   selector: 'app-form',
@@ -23,36 +27,40 @@ import { CommonModule } from '@angular/common';
   ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
+  ],
 })
 export class FormComponent implements OnInit {
   materialForm: FormGroup;
   isEditMode = false;
   estados: string[] = ['ACTIVO', 'DISPONIBLE', 'ASIGNADO'];
-  ciudades = [
-    { id: 1, nombre: 'Ciudad 1' },
-    { id: 2, nombre: 'Ciudad 2' },
-    { id: 3, nombre: 'Ciudad 3' },
-  ];
+  cities: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private materialService: MaterialService
+    private materialService: MaterialService,
+    private cityService: CityService
   ) {
     this.materialForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: [''],
       tipo: ['', Validators.required],
       precio: [0, [Validators.required, Validators.min(0)]],
-      fecha_compra: ['', Validators.required],
-      fecha_venta: [''],
+      fechaCompra: ['', Validators.required],
+      fechaVenta: [''],
       estado: ['', Validators.required],
-      ciudad_id: [null, Validators.required],
+      ciudadId: [null, Validators.required],
     });
   }
 
   ngOnInit(): void {
+    this.cityService.getCities().subscribe((data) => {
+      this.cities = data;
+    });
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEditMode = true;
@@ -74,5 +82,9 @@ export class FormComponent implements OnInit {
         .createMaterial(this.materialForm.value)
         .subscribe(() => this.router.navigate(['/materials']));
     }
+  }
+
+  private formatDate(date: Date): string {
+    return new Date(date).toISOString().split('T')[0];
   }
 }
