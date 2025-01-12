@@ -1,0 +1,27 @@
+<div>
+    <!-- <app-materials-filter (filter)="onFilter($event)"></app-materials-filter> -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Fecha Compra</th>
+                <th>Fecha Venta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let material of materials">
+              <td>{{ material.nombre }}</td>
+              <td>{{ material.tipo }}</td>
+              <td>{{ material.precio }}</td>
+              <td>{{ material.fechaCompra }}</td>
+              <td>{{ material.fechaVenta }}</td>
+              <td>
+                <!-- <button class="btn btn-warning btn-sm" [routerLink]="['/materials/edit', material.id]">Editar</button> -->
+              </td>
+            </tr>
+          </tbody>          
+    </table>
+</div>
