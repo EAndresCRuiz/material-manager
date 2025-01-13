@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MaterialService } from '../material.service';
+import { MaterialService } from '../../core/services/material.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,9 +23,19 @@ import { FilterComponent } from '../filter/filter.component';
 })
 export class ListComponent implements OnInit {
   materials: any[] = [];
-  displayedColumns: string[] = ['nombre', 'tipo', 'acciones'];
+  displayedColumns: string[] = [
+    'nombre',
+    'descripcion',
+    'tipo',
+    'precio',
+    'fechaCompra',
+    'fechaVenta',
+    'estado',
+    'ciudad',
+    'acciones',
+  ];
 
-  constructor(private materialService: MaterialService) { }
+  constructor(private materialService: MaterialService) {}
 
   ngOnInit(): void {
     this.loadMaterials();
@@ -33,8 +43,10 @@ export class ListComponent implements OnInit {
 
   loadMaterials(filters: any = {}): void {
     this.materialService.getFilteredMaterials(filters).subscribe((data) => {
-      this.materials = data;
+      this.materials = data.map((material: any) => ({
+        ...material,
+        ciudadNombre: material.ciudad?.nombre || 'Sin Ciudad',
+      }));
     });
   }
-
 }

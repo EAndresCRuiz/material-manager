@@ -2,17 +2,48 @@
 
 <app-filter (applyFilters)="loadMaterials($event)"></app-filter>
 
-<button mat-raised-button color="primary" routerLink="/materials/create">Crear Nuevo Material</button>
+<button mat-raised-button color="primary" class="my-4" routerLink="/materials/create">Crear Nuevo Material</button>
 
 <mat-table [dataSource]="materials" class="mat-elevation-z8">
+
     <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
         <mat-cell *matCellDef="let material"> {{ material.nombre }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.descripcion }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="tipo">
         <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
         <mat-cell *matCellDef="let material"> {{ material.tipo }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+        <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.precio | currency:'USD':'symbol':'1.2-2' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaCompra">
+        <mat-header-cell *matHeaderCellDef> Fecha de Compra </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.fechaCompra | date:'yyyy-MM-dd' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaVenta">
+        <mat-header-cell *matHeaderCellDef> Fecha de Venta </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.fechaVenta | date:'yyyy-MM-dd' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.estado }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ciudad">
+        <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+        <mat-cell *matCellDef="let material"> {{ material.ciudadNombre }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="acciones">

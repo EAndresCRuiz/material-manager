@@ -1,8 +1,8 @@
-<mat-toolbar color="primary">
-    <span>Material Manager</span>
+<mat-toolbar color="primary" class="custom-toolbar">
+    <span class="title">Material Manager</span>
     <span class="spacer"></span>
-    <a mat-button routerLink="/materials">Lista</a>
-    <a mat-button routerLink="/materials/create">Crear Material</a>
+    <a mat-button (click)="navigate('/materials')" class="toolbar-link">Lista</a>
+    <a mat-button (click)="navigate('/materials/create')" class="toolbar-link">Crear Material</a>
 </mat-toolbar>
 
 <div class="main-content">
